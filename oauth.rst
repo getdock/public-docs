@@ -121,13 +121,13 @@ By signing the ``state`` var properly, you will be able to verify its signature 
 
 Redirect URIs
 -------------
-Only HTTPS addresses are accepted as Redirect URIs. This means that native apps are not supported for now. **Exact match** is used during the authentication flow, and it is forbidden to provide URLs containing anything after the fragment identifier.
+Only HTTPS addresses are accepted as Redirect URIs. **Exact match** is used during the authentication flow, and it is forbidden to provide URLs containing anything after the fragment identifier.
 
 Scopes
 ------
 A ``scope`` is a way to limit a 3rd party app's access to a user's data. There are 2 choices.
 
-Basic Scope (``basic``): This scope will only contain the DOCK user id & ETH address of the contract between the Client and the User. The Client can pass this address and ask the ``dock-gateway`` to fetch and decrypt the user data, and in later versions use this address to go and interact with the contract directly in the Ethereum network.
+Basic Scope (``basic``): This scope will only contain the DOCK user id & ETH address of the contract between the Client and the User. The Client can pass this address and ask the ``dock-gateway`` to fetch and decrypt the user data, and in later versions use this address to go and interact with the contract directly in the Ethereum network. For authentication you only need 'basic' scope.
 
 Full Scope (``full``): This scope will share details about the user within the DOCK system with the partner. The complete list is specified in a separate file.
 
