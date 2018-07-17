@@ -6,3 +6,5 @@ oauth.rst : DOCK OAuth Integration Guide - Use this guide to know about one time
 gateway.rst: Dock Gateway Integration Guide - This guide explains steps to integrate with DOCK gateway to get data approved by the user.
 
 dock-full-scope-data.rst : Complete list of Attributes passed for full scope.
+
+_The DOCK protocol is in beta right now & documentation is subject to change_
