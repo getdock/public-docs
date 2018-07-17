@@ -32,7 +32,7 @@ Following is the simplified version of the flow before diving into details:
 
 Detailed information
 --------------------
-To make sense of the above it can be useful to observe the whole flow in a detailed step-by-step explanation. The following steps explain how the flow would look like for a Client getting an Access Token to act on behalf of one of its users-
+To make sense of the above it can be useful to observe the whole flow in a detailed step-by-step explanation. The following steps explain how the flow would look like for a Client getting an Access Token to act on behalf of one of its users:
 
 Step 1 - Authorization grant query
 ----------------------------------
