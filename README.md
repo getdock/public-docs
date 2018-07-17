@@ -1,4 +1,4 @@
-# public-docs
+# DOCK Integration Guides
 Public documentation about integrating with Dock project. Brief explanation about files:
 
 oauth.rst : DOCK OAuth Integration Guide - Use this guide to know about one time setup required on DOCK side & also how you can integrate with the DOCK OAuth server.
