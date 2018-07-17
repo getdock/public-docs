@@ -210,3 +210,17 @@ The actual data currently has the following form::
         'profile.background': str,
         'profile.status': str
     }
+
+Connection closing
+==================
+
+When one of the parties of a connection wants to terminate the data exchange, they can close the connection::
+
+    ``POST /v1/connection/<connection_addr>/close``
+
+After closing a connection may never be used again. If the parties want to connect again, they must establish a new connection.
+
+Only one of 2 members of a connection may close it.
+
+There may always be at most one open connection for each pair of actors.
+
