@@ -5,10 +5,12 @@ Initial Setup
 -------------
 
 Any new Partner application needs to be first set up with DOCK manually before any authentication or data exchange services can be used. Following are the one time set up steps for partners:
-Provide basic info like your application's name, logo and description.
-Provide these URLs: homepage, privacy policy and at least one callback URI. 
+
+- Provide basic info like your application's name, logo and description.
+- Provide these URLs: homepage, privacy policy and at least one callback URI. 
 The above information, except for the callback URIs, will be shown to the User at the Authorization Page. 
-As a result of registering, you will be given a ``client_id`` and a ``client_secret`` that you will need to use to authenticate your requests to our API.  Please be aware that we do not store your ``client_secret``. You need to save it somewhere safe as soon as you get it since we cannot retrieve it back for you if you lose it. In that event a new set of client id/secret will have to be created for you.
+
+- As a result of registering, you will be given a ``client_id`` and a ``client_secret`` that you will need to use to authenticate your requests to our API.  Please be aware that we do not store your ``client_secret``. You need to save it somewhere safe as soon as you get it since we cannot retrieve it back for you if you lose it. In that event a new set of client id/secret will have to be created.
 
 
 Basic Client Integration Flow
@@ -67,7 +69,7 @@ Step 3 - Using an Authorization Code to get an Access Token
 -----------------------------------------------------------
 
 You now have an ``authorization_code`` that you can use on a call to
-``POST https://app.dock.io/api/v1/oauth/access-token`` to get the actual ``access token``. This is the Token that is to be stored for this User in your application. Remember: this call needs to be made from the BE so the traffic is not visible in the User's browser. The following params are expected in the call:
+``GET https://app.dock.io/api/v1/oauth/access-token`` to get the actual ``access token``. This is the Token that is to be stored for this User in your application. Remember: this call needs to be made from the BE so the traffic is not visible in the User's browser. The following params are expected in the URL for this call:
 
 - ``grant_type``: ``authorization_code`` is expected by default.
 - ``code``: the ``authorization_code`` that you received in Step 2.
@@ -82,21 +84,25 @@ Our server will validate that the given data is correct and will return the foll
 
 
 
-Step 4 - Using an Access Token to get User Data
------------------------------------------------
+Step 4 - Using an Access Token to get contract address
+------------------------------------------------------
 
 You finally have an ``access_token`` that you can use on a call to:
-``GET https://app.dock.io/api/v1/oauth/user-data`` to get the actual data that the User has shared with you. Remember: this call also needs to be made from the BE so the traffic is not visible in the browser. The following params are expected in the call:
+``GET https://app.dock.io/api/v1/oauth/user-data`` to get the contract address that can be used to get data about the user from DOCK gateway.The following params are expected in the call:
 
 - ``client_id``: given to the developer when registering the Client application.
 - ``client_secret``: given to the developer when registering the Client application.
 
 Additionally, the call is expected to contain a header that looks like ``Authorization: Bearer <access_token>`` where you should use the Access Token you got in Step 3.
 
-The response from this call is whatever user data the scope gives access to. It will at least contain the ``id`` of this user in Dock, which you should store for this user in your system. When authenticating this allows you to compare this id to the ones stored in your system, if you find a match for a user you can log that user in. This is the end of the OAuth flow.
+The response from this call has the following
+-  the ``id`` of this user in Dock, which you should store for this user in your system. When authenticating this allows you to compare this id to the ones stored with you, if you find a match for a user then that is the user that has already logged in using DOCK in your application.
+- ETH address of the contract between the Client and the User.
+
+This is the end of the OAuth flow.
 
 
-Appendix 1: Variable Notes
+Appendix: Variable Notes
 ==========================
 Following are the notes about some of the variables mentioned above.
 
@@ -121,37 +127,3 @@ Basic Scope (``basic``): This scope will only contain the DOCK user id & ETH add
 
 Full Scope (``full``): This scope will share a lot more details about the user with the partner. The complete list is specified in the next Appendix.
 
-Appendix 2: Complete list of Attributes passed for full scope
-=============================================================
-
-Following is the list of attributes passed back to the partner if the user has granted ‘full scope’ to the partner application.
-
-- user.first_name
-- user.last_name
-- user.email
-- user.avatar
-- user.headline
-- user.industry
-- user.home_address
-- profile.industry
-- profile.interests
-- profile.languages
-- profile.phone
-- profile.phone_country_code
-- profile.bio
-- profile.reviews
-- profile.status
-- profile.experience
-- profile.skills
-- profile.education
-
-Appendix 3: Roles defined by OAuth 2.0 spec 
-===========================================
-
-Resource owner: the resource owner is the person who is giving access to some portion of their account. In this case the resource owner is a user in the Dock App. The resources are any piece of data that the user is choosing to share: personal information, contacts, work experience, etc. Any system that wants to act on behalf of the user must first get permission from them.
-
-Resource server: what developers usually refer to as the main API. This is the server that contains the user's information that is being accessed by the third-party application. In our case this is https://app.dock.io
-
-Authorization server: the server that the user interacts with when an application is requesting access to their account.
-
-Client: the 3rd party app that is attempting to act on the user's behalf, or access the user's resources. Before the Client can access the user's account, it needs to obtain permission from the user.
