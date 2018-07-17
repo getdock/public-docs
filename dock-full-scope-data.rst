@@ -20,3 +20,8 @@ Following is the list of attributes passed back to the partner if the user has g
 - profile.experience
 - profile.skills
 - profile.education
+
+Exact Schema Definition
+=======================
+
+TBD
