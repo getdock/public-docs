@@ -12,8 +12,11 @@ The above information, except for the callback URIs, will be shown to the User a
 
 - As a result of registering, you will be given a ``client_id`` and a ``client_secret`` that you will need to use to authenticate your requests to our API.  Please be aware that we do not store your ``client_secret``. You need to save it somewhere safe as soon as you get it since we cannot retrieve it back for you if you lose it. In that event a new secret will have to be created.
 
+Client Integration Steps Overview
+=================================
+Basically there are two parts to DOCK integration. The first is integrating with DOCK OAuth Server using the steps in this file. In a separate file we explain how you can integrate with DOCK Gateway to get user data by using the contract address we get at the end of this flow. We will also share a separate file that contains the list of attributes you get from DOCK in the data package you get integrating with the DOCK Gateway. 
 
-Basic Client Integration Flow
+OAuth Client Integration Flow
 =============================
 
 Quick details
