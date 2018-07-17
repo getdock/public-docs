@@ -187,30 +187,6 @@ Example::
       }
     }
 
-Current data schema used by DockApp
-===================================
-
-The actual data currently has the following form::
-
-    {
-        'user.email': str,
-        'user.avatar': str,
-        'user.last_name': str,
-        'user.first_name': str,
-        'user.headline': str,
-        'user.location': str,
-        'user.country': str,
-        'user.city': str,
-        'user.home_address': str,
-        'profile.languages': list,
-        'profile.phone': str,
-        'profile.phone_country_code': str,
-        'profile.bio': str,
-        'profile.reviews': list,
-        'profile.background': str,
-        'profile.status': str
-    }
-
 Connection closing
 ==================
 
