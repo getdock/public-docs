@@ -1,5 +1,5 @@
-Dock Gateway
-++++++++++++
+Dock Gateway Integration Guide
+++++++++++++++++++++++++++++++
 
 This is the overview of how to interact with Dock Gateway. It is presented with an example of Remote-Dock communication. For that to happen, the following routines should be handled in both Remote and Dock App.
 
