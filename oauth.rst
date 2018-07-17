@@ -23,16 +23,16 @@ Quick details
 -------------
 Following is the simplified version of the flow before diving into details: 
 
-- Clients/Partner request an ``authorization_code`` grant type by redirecting the user to the Dock Authorization Page. 
+- Client request an ``authorization_code`` grant type by redirecting the user to the Dock Authorization Page. 
 - The user verifies the information the Client app is requesting access to (the scopes) and also see the app's name, logo and description. 
 - After approval, the user is redirected to the given ``return_uri`` with an ``authorization code`` added as a parameter. 
 - The client can then do a backend call (not redirection) to exchange it for an ``access token``. 
 - Dock will only return an ``access token`` to the right ``authorization code`` coming from the right Client, using the right client credentials. 
-- Finally, by using the Access Token in the ``Authorization`` header, the client will be able to access the requested user data.
+- Finally, by using the ``access token`` in the ``Authorization`` header, the client will be able to access the requested user data.
 
 Detailed information
 --------------------
-To make sense of the above it can be useful to observe the whole flow in a detailed step-by-step explanation. The following steps explain how the flow would look like for a Client getting an Access Token to act on behalf of one of its users, and then using it to ethereum contract address, which will later be used to get user data from the DOCK Gateway:
+To make sense of the above it can be useful to observe the whole flow in a detailed step-by-step explanation. The following steps explain how the flow would look like for a Client getting an Access Token to act on behalf of one of its users-
 
 Step 1 - Authorization grant query
 ----------------------------------
