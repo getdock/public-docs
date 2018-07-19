@@ -7,4 +7,6 @@ Public documentation about integrating with Dock project. Brief explanation abou
 
 [Complete list of Attributes passed for full scope](dock-full-scope-data.rst).
 
+For any questions pl contact:  _engineering@dock.io_
+
 _The DOCK protocol is in beta right now & documentation is subject to change_
