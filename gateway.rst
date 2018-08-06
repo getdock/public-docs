@@ -96,6 +96,9 @@ Example::
       "receiver_public_key": null
     }
 
+Connection info retrieval
+=========================
+
 Once created, a connection can be viewed like this (no authorization required - this info is public on the blockchain anyway)::
 
 ``GET /v1/connection/<connection_address>``
@@ -117,11 +120,11 @@ Example::
       "receiver_public_key": null
     }
 
-Other helpers::
+Other important helpers (this time the authorization is required for the actor context)::
 
-    GET /v1/connection/actor/all  # get all connections for the current actor
-    GET /v1/connection/actor/<peer_address>/all  # get all connections between the current actor and another peer
-    GET /v1/connection/actor/<peer_address>/open  # get the open connection (at most one) between the current actor and another peer
+    GET /v1/all-connections  # get all connections for the current actor
+    GET /v1/peer/<peer_address>/all-connections  # get all connections between the current actor and another peer
+    GET /v1/peer/<peer_address>/open-connection  # get the open connection (at most one) between the current actor and another peer
 
 Connection confirmation
 =======================
@@ -164,10 +167,17 @@ Example::
       "merkle_root": "ffb59de410d6cd1879e9f00ca10b09b410ca4077477da107ed05829d5d3dd1fcbadc1cb70e4c5f09b11705a609226112a8e042df633103d6d8c90035f05767b2"
     }
 
+Alternatively you can create a package using the address of the recipient (however you still need to make sure that a valid connection is open there)::
+
+  ``POST /v1/recipient/<recipient_address>/packages``
+
 Data package retrieval
 ======================
 
+You can retrieve a data package in two ways: either by providing the address of the connection where it is expected to be found or by providing the address of its sender::
+
     ``GET /v1/connection/<connection_addr>/packages/<ipfs_addr>'``
+    ``GET /v1/sender/<sender_address>/packages/<ipfs_addr>'``
 
 Example::
 
@@ -199,4 +209,3 @@ After closing a connection may never be used again. If the parties want to conne
 Only one of 2 members of a connection may close it.
 
 There may always be at most one open connection for each pair of actors.
-
