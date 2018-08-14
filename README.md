@@ -5,6 +5,8 @@ Public documentation about integrating with Dock project. Brief explanation abou
 
 [Dock Gateway Integration Guide](gateway.rst) - This guide explains steps to integrate with DOCK gateway to get data approved by the user.
 
+[Partner Integration by Example](partner-integration-by-example.sh) - An complete example-based guide for Partners to integrate with DockApp. Covers both OAuth and Gateway calls.
+
 [Complete list of Attributes passed for full scope](dock-full-scope-data.rst).
 
 For any questions or comments please contact:  _engineering@dock.io_
