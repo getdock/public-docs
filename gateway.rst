@@ -31,7 +31,7 @@ Example (creating two accounts in a row)::
 Webhook registration
 ====================
 
-This step is optional. An actor may register a webhook in order to facilitate communication with the Gateway. With a webhook, events concerning the actor will be notified to the actor via a HTTP call to the endpoint that the actor provides.
+This step is optional. An actor may register a webhook (or a number of them) in order to facilitate communication with the Gateway. With a webhook, events concerning the actor will be notified to the actor via a HTTP call to the endpoint that the actor provides.
 
 ``PUT /v1/webhook``
 
@@ -64,7 +64,13 @@ Given that a webhook has been established, an example notification may look like
 
 ``secret`` ensures that the notification comes from the authentic source.
 
-A webhook can be deregistered with: ``DELETE /v1/webhook'``
+Using ``PUT`` method to register a webhook removes all previous webhooks of the actor and replaces them with this single new one.
+
+To register multiple webhooks one can use ``POST /v1/webhook`` route that accepts identical input as its ``PUT`` counterpart but does not remove preexisting webhooks.
+
+A single webhook can be deregistered with: ``DELETE /v1/webhook' {"payload_url": <url>}``.
+
+All webhooks registered by the actor can be deregistered with just: ``DELETE /v1/webhook'`` without a payload.
 
 Connection creation
 ===================
