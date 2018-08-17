@@ -7,7 +7,7 @@ Public documentation about integrating with Dock project. Brief explanation abou
 
 [Partner Integration by Example](partner-integration-by-example.sh) - An complete example-based guide for Partners to integrate with DockApp. Covers both OAuth and Gateway calls.
 
-[Complete list of Attributes passed for full scope](dock-full-scope-data.rst).
+[Complete list of available schemas and the attributes each contain](dock-schemas.rst).
 
 For any questions or comments please contact:  _engineering@dock.io_
 
