@@ -67,7 +67,7 @@ https://gateway.dock.io/v1/webhook
 
 # Each time a user wants to connect your service with Dock App,
 # make sure they have a Dock App account and then redirect them to:
-https://app.dock.io/oauth/authorize?client_id=5b648ea5f09b030007bacb92&redirect_uri=https://echo.dock.io/testclient-oauth/&response_type=code&scope=basic,full
+https://app.dock.io/oauth/authorize?client_id=5b648ea5f09b030007bacb92&redirect_uri=https://echo.dock.io/testclient-oauth/&response_type=code&scope=https://getdock.github.io/schemas/basicUserProfile.json,https://getdock.github.io/schemas/email.json
 
 # Once the user has authorized the connection, they will be redirected
 # to the provided `redirect_uri` and given a one-time authorization code, e.g.:
@@ -94,7 +94,7 @@ curl -X GET \
 # Dock App will initiate the Dock connections and will respond with the information
 # about the user and the connection, e.g.:
 {
-    "scopes": ["basic", "full"], 
+    "scopes": ["https://getdock.github.io/schemas/basicUserProfile.json", "https://getdock.github.io/schemas/email.json"], 
     "user_data": {"connection_addr": "1993793065ee99004c9af3689283c65d1b7e3b14", 
     "id": "5b683b6c2c224b004aed7254"}
 }
