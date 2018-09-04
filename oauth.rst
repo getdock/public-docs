@@ -52,7 +52,7 @@ Step 2 - Authorization page
 The User is presented with a page in the Dock application where they need to:
 
 i) Authenticate (if they haven't already done so)
-ii) Check the Application info (name, description, logo, etc)
+ii) Check the application info (name, description, logo, etc)
 iii) Approve the requested access to the given scopes
 
 Additionally, the user is presented the following items:
@@ -76,8 +76,8 @@ You now have an ``authorization_code`` that you can use on a call to
 
 - ``grant_type``: the string "authorization_code" is expected by default.
 - ``code``: the ``authorization_code`` that you received in Step 2.
-- ``client_id``: the id you received when you registered your Application.
-- ``client_secret``: the secret you received when you registered your Application.
+- ``client_id``: the id you received when you registered your application.
+- ``client_secret``: the secret you received when you registered your application.
 
 
 Our server will validate that the given data is correct and will return the following data in JSON format to you:
@@ -104,9 +104,9 @@ The response from this call will be a JSON that contains at least the following 
 
 This is the end of the OAuth flow.
 
-PKCE: OAuth for Native applications
+PKCE: OAuth for Native Applications
 ===================================
-When implemented on native applications, the Authorization Code Grant has some security issues: for instance, a malicious attacker could intercept the authorization_code returned by Auth0 and exchange it for an Access Token. The Proof Key for Code Exchange (PKCE) is a technique used to mitigate this authorization code interception attack. In order to access our API from a mobile app, you need to implement the PKCE OAuth 2.0 grant.
+The OAuth 2.0 spec states that secrets that are statically included as part of a native application should not be treated as confidential secrets, as any user can inspect their copy and learn the shared secret. A malicious attacker could intercept the authorization_code returned by Dock and use these to get an Access Token. The Proof Key for Code Exchange (PKCE) is a technique used to mitigate this authorization code interception attack. In order to access our API from a native application, you need to implement the PKCE OAuth 2.0 grant.
 
 Overview of the flow
 --------------------
@@ -119,7 +119,7 @@ PKCE Step 0 - Generate a Code Verifier and Challenge
 
 Before your native application can begin the OAuth flow from a native app, it needs to generate a ``code_verifier``. The ``code_verifier`` is a cryptographically random string using the characters ``A-Z``, ``a-z``, ``0-9``, and the punctuation characters ``-._~`` (hyphen, period, underscore, and tilde). The ``code_verifier`` needs to be between 43 and 128 characters long (inclusive).
 
-Your application needs to store this ``code_verifier`` and from it generate what is called a ``code_challenge``. This ``code_challenge`` is a BASE64-URL-encoded string of the SHA256 hash of the code verifier.
+Your application needs to store this ``code_verifier`` and generate what is called a ``code_challenge`` from it. This ``code_challenge`` is a BASE64-URL-encoded string of the SHA256 hash of the code verifier.
 
 It is recommended that your app generates a second cryptographically random string and stores it as the ``state`` variable to use in Step 1.
 
@@ -137,6 +137,7 @@ To initiate the OAuth flow, your native Client needs to redirect the user to:
 - ``code_challenge``: the ``code_challenge`` you generated in Step 0.
 - ``code_challenge_method``: 'S256' is always expected, it means that your ``code_challenge`` was produced by using a SHA256 hash (which is mandatory).
 
+Never use an embedded user-agent for this redirection: without the usual address bar and visible certificate validation features that browsers have, it is impossible for the user to know if they are signing in to the legitimate Dock application.
 
 PKCE Step 2 - Authorization page
 --------------------------------
@@ -144,7 +145,7 @@ PKCE Step 2 - Authorization page
 The User is presented with a page in the Dock application where they need to:
 
 i) Authenticate (if they haven't already done so)
-ii) Check the Application info (name, description, logo, etc)
+ii) Check the application info (name, description, logo, etc)
 iii) Approve the requested access to the given scopes
 
 Additionally, the user is presented the following items:
@@ -164,11 +165,11 @@ PKCE Step 3 - Using an Authorization Code to get an Access Token
 ----------------------------------------------------------------
 
 You now have an ``authorization_code`` that you can use on a call to
-``GET https://app.dock.io/api/v1/oauth/access-token`` to get the actual ``access token``. This is the Token that is to be stored for this User in your application. Remember: this call needs to be made from the backend so the traffic is not visible in the User's browser. The following params are expected in the URL for this call:
+``GET https://app.dock.io/api/v1/oauth/access-token`` to get the actual ``access token``. This is the Token that is to be stored for this User in your application. The following params are expected in the URL for this call:
 
 - ``grant_type``: the string "authorization_code" is expected by default.
 - ``code``: the ``authorization_code`` that you received in Step 2.
-- ``client_id``: the id you received when you registered your Application.
+- ``client_id``: the id you received when you registered your application.
 - ``code_verifier``: the ``code_verifier`` you generated in Step 0.
 
 
@@ -217,4 +218,6 @@ To generate an Authorization Code with a custom-schemed Redirect URIs, PKCE need
 
 Scopes
 ------
-A ``scope`` is a way to limit a 3rd party app's access to a user's data. There are many choices, a high level overview of them can be found in [this doc](dock-schemas.rst).
+A ``scope`` is a way to limit a 3rd party app's access to a user's data. There are many choices, a high level overview of them can be found in `this doc`_.
+
+.. _this doc: dock-schemas.rst
