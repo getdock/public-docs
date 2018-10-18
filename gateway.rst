@@ -3,8 +3,10 @@ Dock Gateway Integration Guide
 
 This is the overview of how to interact with Dock Gateway. It is presented with an example of Remote-Dock communication. For that to happen, the following routines should be handled in both Remote and Dock App.
 
-Most of the calls require authorization with a private key. It is achieved by passing a HTTP header like the following one:
+Most of the calls require authorization with a private key (some allow just the public key, such as getting the connection info). It is achieved by passing a HTTP header like the following one:
 ``"Authorization: PrivateKey <private-key-value>"``
+or:
+``"Authorization: PublicKey <public-key-value>"``
 
 Ethereum Account creation
 =========================
@@ -105,13 +107,15 @@ Example::
 Connection info retrieval
 =========================
 
-Once created, a connection can be viewed like this (no authorization required - this info is public on the blockchain anyway)::
+Once created, a connection can be viewed like this (private or public key may be passed - this info is public on the blockchain anyway)::
 
 ``GET /v1/connection/<connection_address>``
 
 Example::
 
-    curl -X GET https://gateway.dock.io/v1/connection/ea0d4db7b9bfe970bebc049bd1d00ea9169d19a3
+    curl -X GET \
+    -H "Authorization: PrivateKey c8e092ea4d9c510d4c81c89b051810796f19d0f8b69f2b1ec0191b5d04dec688" \
+    https://gateway.dock.io/v1/connection/ea0d4db7b9bfe970bebc049bd1d00ea9169d19a3
 
     {
       "confirmed_at": null, 
@@ -126,7 +130,7 @@ Example::
       "receiver_public_key": null
     }
 
-Other important helpers (this time the authorization is required for the actor context)::
+Other important helpers (currently private_key authentication is required)::
 
     GET /v1/all-connections  # get all connections for the current actor
     GET /v1/peer/<peer_address>/all-connections  # get all connections between the current actor and another peer
