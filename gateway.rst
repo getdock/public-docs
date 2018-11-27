@@ -165,10 +165,7 @@ Example::
     -H "Content-Type: application/json" \
     -H "Authorization: PrivateKey c8e092ea4d9c510d4c81c89b051810796f19d0f8b69f2b1ec0191b5d04dec688" \
     -d '
-        {
-          "json_data": {"dolor": "sit", "amet": [1, 2, 3]},
-          "parent_connection_addr": null
-        }
+        {"json_data": {"dolor": "sit", "amet": [1, 2, 3]}}
     ' \
     https://gateway.dock.io/v1/connection/ea0d4db7b9bfe970bebc049bd1d00ea9169d19a3/packages
     
